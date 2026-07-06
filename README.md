@@ -2,7 +2,7 @@
 
 **A tested end-to-end IT service management analytics application** for incident trends, SLA breach risk prediction, root-cause analysis, service health scoring and PMO action planning, built as an interactive Streamlit dashboard.
 
-> 🔗 **Live demo:** _add your Streamlit Cloud link here after deployment_  
+> 🔗 **Live demo:** [Open the ITSM Incident & SLA Analytics app](https://itsm-incident-sla-analytics.streamlit.app/)  
 > 📸 **Screenshots:** see `docs/SCREENSHOTS.md` for the recommended screenshot set.
 
 ---
@@ -22,6 +22,14 @@ This project simulates a ServiceNow/Jira-style ITSM environment with synthetic d
 - Red/Amber/Green service health scoring
 - PMO action plan with owners, priorities and next steps
 - Markdown and CSV exports from the dashboard
+
+## Live demo workflow
+
+1. Open the live app.
+2. Select a scenario preset in the sidebar, such as **SLA pressure week** or **Change-related incident wave**.
+3. Adjust ticket volume, history window and simulation seed.
+4. Click **Run ITSM analysis**.
+5. Walk through SLA breach risk, root cause analysis, service health and the PMO action plan.
 
 ## Dashboard pages
 
@@ -86,38 +94,13 @@ Regenerate local sample data:
 python -m src.data_generator
 ```
 
-Run with Docker:
-
-```bash
-docker build -t itsm-analytics .
-docker run -p 8501:8501 itsm-analytics
-```
-
-## Deploy to Streamlit Cloud
-
-Use:
-
-```text
-Repository: Samadritaacharya/itsm-incident-sla-analytics
-Branch: main
-Main file path: app.py
-```
-
-After deployment, copy the generated Streamlit URL into the **Live demo** line above.
-
 ## Skills demonstrated
 
 ITSM & ITIL thinking · incident/problem/change analytics · SLA management · KPI design · executive reporting · machine learning for operational risk · dashboarding · data storytelling · PMO action planning · owner/priority mapping · Python engineering practice
 
 ## Why this project is relevant to my target roles
 
-This project translates my IBM/Kyndryl ITSM/ITOM service delivery background into a working analytical tool. It is relevant for:
-
-- Technical Project Management / PMO
-- IT Operations / Service Delivery
-- Cloud Operations / AIOps
-- Digital Transformation
-- Business Technology roles in Germany and Europe
+This project translates my IBM/Kyndryl ITSM/ITOM service delivery background into a working analytical tool. It is relevant for Technical Project Management, PMO, IT Operations, Service Delivery, Cloud Operations, AIOps and Digital Transformation roles in Germany and Europe.
 
 ## CV bullet
 
@@ -126,7 +109,3 @@ This project translates my IBM/Kyndryl ITSM/ITOM service delivery background int
 ## Disclaimer
 
 All data in this project is synthetic and generated programmatically. No confidential employer, university, client or personal data is used.
-
----
-
-**Samadrita Acharya** · [LinkedIn](https://www.linkedin.com/in/samadrita-acharya-a07266184/) · [GitHub](https://github.com/Samadritaacharya)
