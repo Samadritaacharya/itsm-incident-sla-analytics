@@ -1,111 +1,147 @@
 # ITSM Incident & SLA Analytics Dashboard
 
-**A tested end-to-end IT service management analytics application** for incident trends, SLA breach risk prediction, root-cause analysis, service health scoring and PMO action planning, built as an interactive Streamlit dashboard.
+An end-to-end IT service management analytics application for incident trends, SLA breach-risk prediction, root-cause analysis, service-health scoring, change impact, and PMO action planning.
 
-> 🔗 **Live demo:** [Open the ITSM Incident & SLA Analytics app](https://itsm-incident-sla-analytics.streamlit.app/)  
-> 📸 **Screenshots:** see `docs/SCREENSHOTS.md` for the recommended screenshot set.
+[![Python CI](https://github.com/Samadritaacharya/itsm-incident-sla-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/Samadritaacharya/itsm-incident-sla-analytics/actions/workflows/ci.yml)
 
----
+**Live application:** [itsm-incident-sla-analytics.streamlit.app](https://itsm-incident-sla-analytics.streamlit.app/)  
+**Validation evidence:** [VALIDATION_REPORT.md](VALIDATION_REPORT.md)  
+**Portfolio owner:** [Samadrita Acharya](https://www.linkedin.com/in/samadrita-acharya-a07266184/)
+
+## Recruiter quick view
+
+| Area | Evidence in this project |
+|---|---|
+| Business problem | IT operations teams need to identify deteriorating services, SLA risk, recurring causes, and accountable improvement actions. |
+| Product solution | A seven-page Streamlit dashboard using synthetic ServiceNow/Jira-style incident data. |
+| Analytics | KPI calculation, MTTR and SLA analysis, change impact, Pareto/root-cause analysis, and service-health scoring. |
+| Machine learning | SLA breach-probability scoring for the open incident queue using scikit-learn. |
+| PMO value | RAG service health, prioritized recommendations, owners, deadlines, and downloadable action plans. |
+| Engineering | Modular Python code, automated tests, GitHub Actions, Docker support, and documented validation. |
+| Data/privacy | All records are generated synthetic data; no confidential employer or client information is used. |
 
 ## Business problem
 
-IT operations teams handle many incidents but often lack a consolidated view of what matters most: deteriorating services, open tickets at risk of SLA breach, recurring root causes, change-related instability and ownership for improvement actions.
+IT operations teams handle large incident queues but often lack one decision-ready view of the questions leadership and service owners care about:
+
+- Which services are deteriorating?
+- Which open incidents are most likely to breach SLA?
+- Are recent changes driving instability?
+- Which causes explain most recurring incidents?
+- Who owns the next corrective action?
 
 ## Solution
 
-This project simulates a ServiceNow/Jira-style ITSM environment with synthetic data and turns it into decision-ready analytics:
+The application simulates a realistic ITSM environment and converts operational records into:
 
-- executive KPI overview
-- incident and service deep dives
-- machine-learning SLA breach probability scoring
-- root-cause and change-impact analysis
-- Red/Amber/Green service health scoring
-- PMO action plan with owners, priorities and next steps
-- Markdown and CSV exports from the dashboard
+- executive KPIs and weekly demand trends
+- incident analysis by category, service, assignment group, and age
+- ML-based SLA breach-risk scoring
+- change-related incident analysis
+- Pareto and breach-rate root-cause views
+- composite Red/Amber/Green service-health scores
+- prioritized PMO action plans with owners and next steps
+- downloadable Markdown and CSV outputs
 
-## Live demo workflow
+## Two-minute recruiter demo
 
-1. Open the live app.
-2. Select a scenario preset in the sidebar, such as **SLA pressure week** or **Change-related incident wave**.
-3. Adjust ticket volume, history window and simulation seed.
-4. Click **Run ITSM analysis**.
-5. Walk through SLA breach risk, root cause analysis, service health and the PMO action plan.
+1. Open the [live app](https://itsm-incident-sla-analytics.streamlit.app/).
+2. Select **SLA pressure week** or **Change-related incident wave**.
+3. Click **Run ITSM analysis**.
+4. Review the executive KPIs and high-risk open queue.
+5. Explain the change-impact and root-cause findings.
+6. Finish with the service-health view and PMO action plan.
 
 ## Dashboard pages
 
-| # | Page | What it shows |
-|---|------|---------------|
-| 1 | Executive Overview | Headline KPIs and weekly ticket volume |
-| 2 | Incident Analytics | Category, service, assignment group and aging views |
-| 3 | SLA Breach Risk | ML breach-probability scoring of the open queue |
-| 4 | Change Impact | Change-related incidents and SLA impact |
-| 5 | Root Cause Analysis | Pareto and breach-rate analysis by root cause |
-| 6 | Service Health | Composite service health score with RAG status |
-| 7 | Recommendations / PMO Action Plan | Auto-generated PMO improvement actions and exports |
-
-## Tech stack
-
-`Python` · `Streamlit` · `Pandas` · `NumPy` · `Plotly` · `scikit-learn` · `pytest` · `Docker`
+| # | Page | Decision supported |
+|---|---|---|
+| 1 | Executive Overview | What is the current operational situation? |
+| 2 | Incident Analytics | Where is ticket volume and aging concentrated? |
+| 3 | SLA Breach Risk | Which open incidents require immediate attention? |
+| 4 | Change Impact | Are deployments or changes increasing incident risk? |
+| 5 | Root Cause Analysis | Which causes drive the majority of incidents and breaches? |
+| 6 | Service Health | Which services are Green, Amber, or Red? |
+| 7 | Recommendations / PMO Action Plan | What should happen next, by whom, and with what priority? |
 
 ## Architecture
 
 ```text
-app.py                      # Streamlit UI — 7 pages, filters, exports
-src/
-├── data_generator.py       # synthetic ServiceNow/Jira-style ticket data
-├── scoring.py              # KPIs, ML breach model, service health score
-└── recommendations.py      # PMO action plan + Markdown report export
-tests/test_project.py       # 13 tests for generation, scoring, planning
-Dockerfile                  # containerized deployment
-VALIDATION_REPORT.md        # tested results
-PUBLISH_GUIDE.md            # Streamlit + GitHub finish steps
+app.py
+├── seven-page Streamlit interface
+├── scenario controls and filters
+├── interactive charts and risk views
+└── Markdown / CSV exports
+
+src/data_generator.py
+└── synthetic ServiceNow/Jira-style incident generation
+
+src/scoring.py
+├── KPI and SLA calculations
+├── breach-risk model
+└── composite service-health score
+
+src/recommendations.py
+└── prioritized PMO actions and status-report generation
+
+tests/test_project.py
+└── data, scoring, prediction, recommendation, and app-render tests
+
+.github/workflows/ci.yml
+└── automated pytest execution on pushes and pull requests
 ```
 
 ## Validation status
 
-This repository was tested before publication:
+The repository includes a documented pre-publication validation report:
 
 - `13/13` pytest tests passed
-- `7/7` dashboard pages rendered successfully with Streamlit AppTest
-- Streamlit app booted successfully
+- `7/7` Streamlit pages rendered with Streamlit AppTest
+- Streamlit server started successfully
 - health endpoint returned `200 ok`
-- synthetic data generator verified
+- synthetic data generation, breach-risk scoring, service-health scoring, and exports were verified
 
-See [`VALIDATION_REPORT.md`](VALIDATION_REPORT.md) for details.
+See [VALIDATION_REPORT.md](VALIDATION_REPORT.md) for the recorded validation scope. GitHub Actions now reruns the test suite for future changes.
 
-## How to run locally
+## Technology stack
+
+`Python` · `Streamlit` · `Pandas` · `NumPy` · `Plotly` · `scikit-learn` · `pytest` · `GitHub Actions` · `Docker`
+
+## Run locally
 
 ```bash
 git clone https://github.com/Samadritaacharya/itsm-incident-sla-analytics.git
 cd itsm-incident-sla-analytics
-pip install -r requirements.txt
-streamlit run app.py
+python -m venv .venv
 ```
 
-Run the tests:
-
 ```bash
-pytest -v
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+
+# macOS/Linux
+source .venv/bin/activate
 ```
 
-Regenerate local sample data:
-
 ```bash
-python -m src.data_generator
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pytest -q
+python -m streamlit run app.py
 ```
 
 ## Skills demonstrated
 
-ITSM & ITIL thinking · incident/problem/change analytics · SLA management · KPI design · executive reporting · machine learning for operational risk · dashboarding · data storytelling · PMO action planning · owner/priority mapping · Python engineering practice
+ITSM and ITIL thinking · incident/problem/change analytics · SLA management · operational KPI design · service-health scoring · machine learning for operational risk · executive reporting · PMO action planning · Python engineering · data storytelling
 
-## Why this project is relevant to my target roles
+## Why this project is relevant to my profile
 
-This project translates my IBM/Kyndryl ITSM/ITOM service delivery background into a working analytical tool. It is relevant for Technical Project Management, PMO, IT Operations, Service Delivery, Cloud Operations, AIOps and Digital Transformation roles in Germany and Europe.
+This project translates my IBM/Kyndryl ITSM/ITOM service-delivery background into a working analytics product and connects it with my SAP cloud-delivery and PMO experience. It is relevant to Technical Project Management, PMO, IT Operations, Service Delivery, Cloud Operations, AIOps, and Digital Transformation roles.
 
-## CV bullet
+## CV / LinkedIn project description
 
-> Built an ITSM Incident & SLA Analytics Dashboard using Python, Streamlit, Pandas, Plotly and scikit-learn to analyze synthetic ServiceNow/Jira-style incident data, identify SLA breach risk, track MTTR, visualize root causes and generate operational improvement insights.
+> Built a tested ITSM Incident & SLA Analytics Dashboard using Python, Streamlit, Pandas, Plotly, and scikit-learn to analyze synthetic ServiceNow/Jira-style incidents, predict SLA breach risk, monitor MTTR and service health, assess change impact, identify root causes, and generate prioritized PMO action plans.
 
-## Disclaimer
+## Responsible portfolio use
 
-All data in this project is synthetic and generated programmatically. No confidential employer, university, client or personal data is used.
+All data is synthetic and generated programmatically. The project is independent and contains no confidential SAP, IBM, Kyndryl, university, employer, customer, or client data.
